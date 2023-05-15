@@ -1,0 +1,22 @@
+* {
+  font-family: "Poppins", sans-serif;
+}
+.h-font {
+  font-family: "Merienda", cursive;
+}
+
+/* 관리자 대시보드 */
+#dashboard-menu {
+  position: fixed;
+  height: 100%;
+}
+
+@media screen and (max-width: 992px) {
+  #dashboard-menu {
+    height: auto;
+    width: 100%;
+  }
+  #main-content {
+    margin-top: 60px;
+  }
+}
