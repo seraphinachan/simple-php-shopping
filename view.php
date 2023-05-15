@@ -91,59 +91,54 @@
 
   <section class="py-5">
     <div class="container px-4 px-lg-5 my-5">
-      <div class="row gx-4 gx-lg-5 align-items-center">
+      <div class="row gx-4 gx-lg-5 product_data">
         <div class="col-md-6">
           <img class="card-img-top mb-5 mb-md-0" src="./data/seller_upload/<?= $row['image']; ?>">
-      </div>
-      <div class="col-md-6">
-        <form id="add_to_cart" action="POST">
-          <input type="hidden" name="productid" value="<?= $row['idx']; ?>">
-          <input type="hidden" name="image" value="<?= $row['image']; ?>">
-          <input type="hidden" name="name" value="<?= $row['name']; ?>">
-          <input type="hidden" name="price" value="<?= $row['price']; ?>">
-          <input type="hidden" name="qty" value="">
-          <div class="row">
-            <div class="align-items-start">
-              <div div class="d-flex md-6">
+        </div>
+        <div class="col-md-6">
+            <!-- Fixed: added a default value for the quantity input -->
+            <div class="row align-items-start">
+              <!-- Fixed: added the "align-items-start" class to align items to the top -->
+              <div class="col-md-12">
                 <h3><?= $row['name'] ?></h3>
+                <h3 class="iprice"><?= $row['price'] ?>원</h3>
               </div>
-              <div class="d-flex md-6 mt-2">
-                <div class="iprice">
-                  <h3><?= $row['price'] ?>원</h3>
+            </div>
+              <div class="col-md-12" style="height: 120px;"></div>
+              <hr class="mt-4" style="width: 80%;">
+              <div class="col-md-12 mt-4">
+                <div class="input-group mb-3" style="width: 130px;">
+                  <button class="input-group-text decrement-btn">-</button>
+                  <input type="text" class="form-control text-center input-qty bg-white" value="1" disabled>
+                  <button class="input-group-text increment-btn">+</button>
                 </div>
               </div>
-            </div>
-            <hr class="mt-4" style="width: 80%;" />            
-            <div class="d-flex md-6 mt-2">
-              <input type="number" value="1" min="1" max="100" step="1"/>
-            </div>
-            <hr class="mt-4" style="width: 80%;" />
-            <div class="d-flex mb-6 mt-2">
-              <div>총 상품 금액</div>
+              <hr class="mt-4" style="width: 80%;" />
+              <div class="d-flex bd-highlight mb-3" style="width: 80%;">
+                <div class="me-auto p-2 bd-highlight">총 상품 금액</div>
+                <div class="p-2 bd-highlight" id="tqty">총 수량 : </div>
+                <div class="p-2 bd-highlight"></div>
               </div>
-            </div>
-            <div class="d-grid gap-2 col-6 mt-4">
-              <div>
-                <button class="btn btn-outline-dark btn-lg shadow-none" type="button" style="width:300px;">
-                  <i class="bi-cart-fill me-1"></i>
-                  장바구니 담기
-                </button>
-              </div>
-              <div>
-                <button class="btn btn-outline-secondary btn-lg shadow-none" type="button" style="width:150px;">
-                  <i class="bi bi-wallet-fill"></i>
-                  바로 구매하기
-                </button>
-              </div>
-            </div>
+          <div class="d-flex mb-6 mt-4 gap-5">
+            <button type="submit" class="btn btn-primary btn-lg shadow-none" style="width: 270px;">바로 구매</button>
+            <form id="add_to_cart" method="POST" action="add_to_cart.php">
+              <!-- Fixed: added "method" and "action" attributes to form -->
+              <input type="hidden" name="productid" value="<?= $row['idx']; ?>">
+              <input type="hidden" name="image" value="<?= $row['image']; ?>">
+              <input type="hidden" name="name" value="<?= $row['name']; ?>">
+              <input type="hidden" name="price" value="<?= $row['price']; ?>">
+              <input type="hidden" name="qty" value="1">
+              <button type="submit" class="btn btn-secondary btn-lg shadow-none" style="width: 150px;">장바구니</button>
+            </form>
           </div>
+
         </form>
       </div>
     </div>
   </div>
 
   <!-- 수량에 따라서 상품 금액 변경 -->
-  <script>
+  <!-- <script>
     var iprice = document.getElementsByClassName('iprice');
     var iqty = document.getElementsByClassName('iqty');
     var itotal = document.getElementsByClassName('itotal');
@@ -155,7 +150,10 @@
     }
 
     gTotal();
-  </script>
+  </script> -->
+
+  <!-- input number spinner -->
+  <script src="js/custom.js"></script>
 
   <!-- ajax 로 데이터 전송 -->
   <script>

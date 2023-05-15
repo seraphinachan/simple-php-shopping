@@ -1,7 +1,7 @@
 <?php
 session_start();
-include('../dbconfig.php');
-
+include('../../dbconfig.php');
+// $userid    = $_POST['user_id'];
 $userid    = $_SESSION['user_id'];
 $productid = $_POST['productid'];
 $rating    = $_POST['rating'];
@@ -13,11 +13,19 @@ $content = $_POST['content'];
 $query = "INSERT INTO product_rating (user_id, product_id, rating, title, content) VALUES (?, ?, ?, ?, ?)";
 $stmt = $conn->prepare($query);
 $stmt->bind_param("sssss", $userid, $productid, $rating, $title, $content);
-$stmt->execute();
+
+if ($stmt->execute()) {
+  // header('Location: items.php');
+  // exit;
+} else {
+  die("오류가 발생하였습니다. 다시 시도해주세요." . $conn->error);
+}
+
 
 if(isset($_POST["action"]))
 {
   //count(idx) as idx
+  // echo "ssdsadsadas";
   $select_cnt_sql = "
   select
   count(idx) as total_cnt,
@@ -51,6 +59,5 @@ if(isset($_POST["action"]))
   echo json_encode($output);
   exit;
 }
-
 
 ?>
