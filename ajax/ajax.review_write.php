@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('../../dbconfig.php');
+include('../dbconfig.php');
 // $userid    = $_POST['user_id'];
 $userid    = $_SESSION['user_id'];
 $productid = $_POST['productid'];
