@@ -52,12 +52,26 @@
         <div class="card-body">
           <h5 class="text-center"><?= $row['name']; ?></h5>
           <div class="d-grid gap-2 col-8 mx-auto">
-            <button type="button" class="btn btn-outline-dark shadow-none" onclick="location.href='register.php'">
-              바로 구매하기
-            </button>
-            <button type="button" class="btn btn-outline-dark shadow-none" onclick="location.href='register.php'">
-              장바구니 담기
-            </button>
+            <form action="pay_now.php">
+              <input type="hidden" name="idx" value="<?= $row['idx']; ?>">
+              <input type="hidden" name="image" value="<?= $row['image']; ?>">
+              <input type="hidden" name="name" value="<?= $row['name']; ?>">
+              <input type="hidden" name="price" value="<?= $row['price']; ?>">
+              <input type="hidden" name="qty" value="1">
+              <button type="submit" class="btn btn-outline-dark shadow-none" style="width: 170px;">
+                바로 구매하기
+              </button>
+            </form>
+            <form action="manage_cart.php" method="POST">
+              <input type="hidden" name="idx" value="<?= $row['idx']; ?>">
+              <input type="hidden" name="image" value="<?= $row['image']; ?>">
+              <input type="hidden" name="name" value="<?= $row['name']; ?>">
+              <input type="hidden" name="price" value="<?= $row['price']; ?>">
+              <input type="hidden" name="qty" value="1">
+              <button type="submit" name="Add_To_Cart" class="btn btn-outline-dark shadow-none" style="width: 170px;">
+                장바구니 추가
+              </button>
+            </form>
           </div>
         </div>
       </div>
