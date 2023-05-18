@@ -37,22 +37,21 @@
       </div> -->
 
       <div class="d-flex">
-        <?php
-          $count = 0;
-          if(isset($_SESSION['cart']))
-          {
-          $count = count($_SESSION['cart']);
-          }
-        ?>
 
         <?php
           if ($_SESSION['user_id']) {?>
             <a href="mycart.php" type="button" class="btn btn-outline-success shadow-none me-lg-3 me-2">
-              장바구니 (<?php echo $count; ?>)
+              장바구니 
             </a>
-            <button type="button" class="btn btn-outline-dark shadow-none me-lg-3 me-2" onclick="location.href='mypage.php'">
-                마이페이지
-            </button>
+            <div class="dropdown">
+              <button class="btn btn-outline-secondary dropdown-toggle shadow-none me-lg-3 me-2" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                마이 페이지
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <li><a class="dropdown-item" href="./order_list.php">주문 내역</a></li>
+                <li><a class="dropdown-item" href="./modify_identity.php">개인 정보 수정</a></li>
+              </ul>
+            </div>
             <button type="button" class="btn btn-outline-dark shadow-none me-lg-3 me-2" onclick="location.href='logout.php'">
                 로그아웃
             </button>

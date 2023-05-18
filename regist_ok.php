@@ -5,6 +5,7 @@ require('dbconfig.php');
 $userid = $_POST['userid'];
 $userpass = $_POST['userpass'];
 $checkpass = $_POST['checkpass'];
+$username = $_POST['username'];
 $useremail = $_POST['useremail'];
 $usertel = $_POST['usertel'];
 $postcode = $_POST['postcode'];
@@ -32,12 +33,12 @@ if ($userpass != $checkpass) {
 }
 
 // Prepare the SQL query using a prepared statement
-$sql = "INSERT INTO user_info(user_id, user_pass, user_email, user_tel, postcode, roadAddress, jibunAddress, detailAddress, extraAddress) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+$sql = "INSERT INTO user_info(user_id, user_pass, user_name, user_email, user_tel, postcode, roadAddress, jibunAddress, detailAddress, extraAddress) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 $stmt = mysqli_stmt_init($conn);
 $prepareStmt = mysqli_stmt_prepare($stmt, $sql);
 
 if ($prepareStmt) {
-    mysqli_stmt_bind_param($stmt, "sssssssss", $userid, $userpass, $useremail, $usertel, $postcode, $roadAddress, $jibunAddress, $detailAddress, $extraAddress);
+    mysqli_stmt_bind_param($stmt, "ssssssssss", $userid, $userpass, $username, $useremail, $usertel, $postcode, $roadAddress, $jibunAddress, $detailAddress, $extraAddress);
     mysqli_stmt_execute($stmt);
     echo "<script>alert('회원가입이 완료되었습니다.');";
     echo "window.location.replace('index.php');</script>";

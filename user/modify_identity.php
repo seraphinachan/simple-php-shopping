@@ -1,3 +1,17 @@
+<?php
+  session_start();
+
+$userid = (isset($_SESSION['userid']) && $_SESSION['userid'] != '') ? $_SESSION['userid'] : '';
+
+if($userid == '') {
+  echo 
+  "
+  <script>
+    self.location.href='../index.php'; 
+  </script>
+  ";
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,7 +36,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
   <?php
-    include('header.php');
+    include('../header.php');
   ?>
 
   <div class="container py-5 h-100">
@@ -42,11 +56,6 @@
                 <input type="button" id="checkIdBtn" value="중복확인" onclick="checkId()">
               </div>
               <p class="text-start" id="result">&nbsp;</p>
-              </div>
-              <div class="row">
-                <div class="col-md-6 mb-3">
-                  <input type="text" class="form-control" id="username" name="username" placeholder="이름" required>
-                </div>
               </div>
               <div class="row">
                   <div class="col-md-6 mb-3">
@@ -192,7 +201,7 @@
                   }
                   // 건물명이 있고, 공동주택일 경우 추가한다.
                   if(data.buildingName !== '' && data.apartment === 'Y'){
-                     extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
                   }
                   // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
                   if(extraRoadAddr !== ''){

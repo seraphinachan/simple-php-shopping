@@ -1,3 +1,20 @@
+<?php
+session_start();
+require('dbconfig.php');
+
+$userid = (isset($_SESSION['user_id']) && $_SESSION['user_id'] != '') ? $_SESSION['user_id'] : '';
+
+if($userid == '') {
+  echo 
+  "
+  <script>
+    alert('잘못된 접근 입니다.');
+    self.location.href='index.php'; 
+  </script>
+  ";
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,21 +48,30 @@
         <div class="card shadow-2-strong" style="border-radius: 1rem;">
           <div class="card-body p-5 text-center">
 
-            <h3 class="mb-3">회원가입</h3>
+            <!-- 해당하는 아이디 가져오기 -->
+            <?php
+              $query = "SELECT * FROM user_info WHERE user_id = ?";
+              $stmt = $conn->prepare($query);
+              $stmt->bind_param('s', $userid);
+              $stmt->execute();
+              $result = $stmt->get_result();
+              $user_array = $result->fetch_assoc();
+            ?>
+
+            <h3 class="mb-3">개인 정보 수정</h3>
             <i class="bi bi-people-fill fs-1 me-6"></i>
             <form action="regist_ok.php" method="POST" name="registform" id="regist_form">
               <div class="row align-items-end inputId">
               <div class="col-md-6 mb-3 mt-3">
-                <input type="text" class="form-control" id="userid" name="userid" placeholder="아이디" required>
-              </div>
-              <div class="col-md-6 mb-3" style="width:100px;">
-                <input type="button" id="checkIdBtn" value="중복확인" onclick="checkId()">
+                <fieldset disabled>
+                  <input type="text" id="disabledTextInput" value="<?= $user_array['user_id']; ?>" class="form-control" >
+                </fieldset>
               </div>
               <p class="text-start" id="result">&nbsp;</p>
               </div>
               <div class="row">
                 <div class="col-md-6 mb-3">
-                  <input type="text" class="form-control" id="username" name="username" placeholder="이름" required>
+                  <input type="text" class="form-control" id="username" name="username" value="<?= $user_array['user_name']; ?>">
                 </div>
               </div>
               <div class="row">
@@ -58,7 +84,7 @@
                 </div>
                 <div class="row">
                   <div class="col-md-12 mb-3">
-                    <input type="text" class="form-control" id="useremail" name="useremail" placeholder="이메일" required>
+                    <input type="text" class="form-control" value="<?= $user_array['user_email']; ?>" id="useremail" name="useremail" placeholder="이메일" required>
                   </div>
                 </div>
                 <div class="row">
@@ -114,54 +140,6 @@
 </body>
 </html>
 
-<!-- 아이디 중복확인 -->
-<script>
-  // regist.js
-  const checkId = () => {
-  // userid, result 변수에 대입
-  const userid = document.registform.userid;
-  const result = document.querySelector('#result');
-
-  // 중복체크 시에 한번 더 userid 입력값 체크
-  if(userid.value === '') {
-    alert('아이디를 입력해주세요.');
-    userid.focus();
-    return false;
-  }
-  if(userid.value.length < 4 || userid.value.length > 12){
-    alert("아이디는 4자 이상 12자 이하로 입력해주세요.");
-    userid.focus();
-    return false;
-  }
-
-  // Ajax를 사용한 아이디 중복 체크
-  const xhr = new XMLHttpRequest();
-  xhr.onreadystatechange = () => {
-    if(xhr.readyState === XMLHttpRequest.DONE) {
-      if(xhr.status === 200) {
-        let txt = xhr.responseText.trim();
-        if(txt === "O") {
-          result.style.display = "block";
-          result.style.color = "green";
-          result.innerHTML = "사용할 수 있는 아이디입니다.";
-        } else {
-          result.style.display = "block";
-          result.style.color = "red";
-          result.innerHTML = "중복된 아이디입니다.";
-          userid.focus();
-          // 키 입력 시 result 숨김 이벤트
-          userid.addEventListener("keydown", function(){
-            result.style.display = "none";
-          });
-        }
-      }
-    }
-  };
-    xhr.open("GET", `checkId_ok.php?userid=${userid.value}`, true);
-    xhr.send();
-  };
-  </script>
-
   <!-- 전화번호 입력 -->
   <script>
     const autoHyphen2 = (target) => {
@@ -192,7 +170,7 @@
                   }
                   // 건물명이 있고, 공동주택일 경우 추가한다.
                   if(data.buildingName !== '' && data.apartment === 'Y'){
-                     extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
                   }
                   // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
                   if(extraRoadAddr !== ''){

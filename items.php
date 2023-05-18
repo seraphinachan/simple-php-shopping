@@ -1,6 +1,6 @@
 <?php
   require('dbconfig.php');
-  require('lib.php');  
+  require('lib.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,7 +24,7 @@
 
         <?php
           // 페이징 처리
-          $limit = 3;
+          $limit = 4;
           $page_limit = 5;
 
           $page = (isset($_GET['page']) && $_GET['page'] != '' && is_numeric($_GET['page'])) ? $_GET['page'] : 1;
@@ -46,7 +46,7 @@
             foreach ($result as $row) {
         ?>
 
-        <div class="col-lg-4 col-md-6 my-3">
+        <div class="col-lg-3 col-md-6 my-3">
           <div class="card border-0 shadow" style="max-width: 280px; margin: auto;">
             <img src="./data/seller_upload/<?= $row['image']; ?>" data-idx="<?= $row['idx']; ?>" class="card-img-top" id="view" style="max-width: 280px; max-height: 190px; cursor: pointer;">
             <div class="card-body">
@@ -54,7 +54,12 @@
               <h5 class="text-center"><?= $row['price']; ?> 원</h5>
               <div class="d-grid gap-2 col-8 mx-auto">
                 <div class="text-center">
-                  <form action="buy.php">
+                  <form action="pay_now.php">
+                    <input type="hidden" name="idx" value="<?= $row['idx']; ?>">
+                    <input type="hidden" name="image" value="<?= $row['image']; ?>">
+                    <input type="hidden" name="name" value="<?= $row['name']; ?>">
+                    <input type="hidden" name="price" value="<?= $row['price']; ?>">
+                    <input type="hidden" name="qty" value="1">
                     <button type="submit" class="btn btn-outline-dark shadow-none">
                       바로 구매하기
                     </button>
