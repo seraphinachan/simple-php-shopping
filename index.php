@@ -97,6 +97,7 @@
 </body>
 </html>
 
+<<<<<<< HEAD
 <!-- 상품 사진 클릭하면 상세 보기 화면으로 이동 -->
 <script>
   const view = document.querySelectorAll("#view")
@@ -108,6 +109,8 @@
 </script>
 
 <!-- 더보기 버튼 클릭하면 데이터 가져오기 -->
+=======
+>>>>>>> b9a434d176c7641416983952dbe6338572d0a051
 <script>
 $(document).on("click", ".loadmore", function() {
   var offset = $(this).data("offset");
