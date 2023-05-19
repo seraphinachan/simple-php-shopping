@@ -43,18 +43,30 @@ try {
     $delete_query = "DELETE FROM cart WHERE user_id = '$user_id'";
     $result = mysqli_query($conn, $delete_query);
 
-    if($result)
-      {
-        echo "<script>
-            alert('결제 성공');
-            window.location.href='receipt.php';
-          </script>";
-      }else{
+    if ($result) {
+        // Send email notification
+        $to = $user_email;
+        $subject = "$user_name 님 주문하신 내역을 확인해주세요.";
+        $message = "상품을 구매해 주셔서 감사합니다!<br>주문 번호는 $order_id 입니다.<br>주문 내역은 마이 페이지에서 확인하실 수 있습니다.";
+        $headers = "From: jiyeonyee0312@gmail.com";
+
+        if (mail($to, $subject, $message, $headers)) {
+            echo "<script>
+                alert('결제 성공');
+                window.location.href='receipt.php';
+              </script>";
+        } else {
+            echo "<script>
+              alert('오류가 발생했습니다. 다시 시도해 주세요.');
+              window.location.history.back();
+            </script>";
+        }
+    } else {
         echo "<script>
           alert('오류가 발생했습니다. 다시 시도해 주세요.');
           window.location.history.back();
         </script>";
-      }
+    }
 
     exit;
 } catch (Exception $e) {

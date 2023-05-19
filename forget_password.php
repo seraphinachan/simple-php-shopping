@@ -24,28 +24,22 @@
       <div class="card shadow-2-strong" style="border-radius: 1rem;">
         <div class="card-body p-5 text-center">
 
-          <form action="login_ok.php" method="POST">
-            <h3 class="mb-3">로그인</h3>
-            <i class="bi bi-person-circle fs-1 me-6"></i>
+          <form action="forget_password_ok.php" method="POST">
+            <h3 class="mb-3">비밀번호 찾기</h3>
+            <i class="bi bi-key fs-1 me-6"></i>
 
             <div class="form-outline mb-4 mt-4">
               <input type="text" id="userid" name="userid" class="form-control" placeholder="아이디" />
             </div>
 
             <div class="form-outline mb-4">
-              <input type="password" id="userpass" name="userpass" class="form-control" placeholder="비밀번호" />
+              <input type="email" id="useremail" name="useremail" class="form-control" placeholder="이메일" />
             </div>
 
-            <button class="btn btn-outline-dark shadow-none mb-3 login_btn" type="submit">로그인</button>
+            <div id="passwordHelp" class="form-text">새로운 비밀번호가 전송될 이메일은 회원가입 당시에 입력한 정보와 관련된 이메일 주소로 입력해주세요.</div>
+
+            <button class="btn btn-outline-dark shadow-none mb-3 mt-4" type="submit">제출하기</button>
           </form>
-
-          <div class="signup_link mt-2">
-            아직 회원이 아니신가요? <a href="register.php">회원가입</a>
-          </div>
-
-          <div class="forget_password_link mt-2">
-            <a href="forget_password.php">비밀번호를 잊어버리셨나요? </a>
-          </div>
 
         </div>
       </div>

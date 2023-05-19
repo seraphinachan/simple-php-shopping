@@ -5,11 +5,11 @@ require('dbconfig.php');
 $userid = (isset($_SESSION['user_id']) && $_SESSION['user_id'] != '') ? $_SESSION['user_id'] : '';
 
 if($userid == '') {
-  echo 
+  echo
   "
   <script>
     alert('잘못된 접근 입니다.');
-    self.location.href='index.php'; 
+    self.location.href='index.php';
   </script>
   ";
 }
@@ -60,11 +60,11 @@ if($userid == '') {
 
             <h3 class="mb-3">개인 정보 수정</h3>
             <i class="bi bi-people-fill fs-1 me-6"></i>
-            <form action="regist_ok.php" method="POST" name="registform" id="regist_form">
+            <form action="modify_identity_ok.php" method="POST" name="modifyform" id="modify_form">
               <div class="row align-items-end inputId">
               <div class="col-md-6 mb-3 mt-3">
                 <fieldset disabled>
-                  <input type="text" id="disabledTextInput" value="<?= $user_array['user_id']; ?>" class="form-control" >
+                  <input type="text" id="disabledTextInput" id="userid" name="userid" value="<?= $user_array['user_id']; ?>" class="form-control" >
                 </fieldset>
               </div>
               <p class="text-start" id="result">&nbsp;</p>
@@ -84,17 +84,17 @@ if($userid == '') {
                 </div>
                 <div class="row">
                   <div class="col-md-12 mb-3">
-                    <input type="text" class="form-control" value="<?= $user_array['user_email']; ?>" id="useremail" name="useremail" placeholder="이메일" required>
+                    <input type="text" class="form-control" id="useremail" name="useremail" value="<?= $user_array['user_email']; ?>" required>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-md-12 mb-3">
-                    <input type="text" oninput="autoHyphen2(this)" maxlength="13" class="form-control" id="usertel" name="usertel" placeholder="전화번호">
+                    <input type="text" oninput="autoHyphen2(this)" maxlength="13" class="form-control" id="usertel" name="usertel" value="<?= $user_array['user_tel']; ?>" required>
                   </div>
                 </div>
                 <div class="row align-items-end inputId">
                 <div class="col-md-6 mb-3">
-                  <input type="text" class="form-control" id="postcode" name="postcode" placeholder="우편번호" required>
+                  <input type="text" class="form-control" id="postcode" name="postcode" value="<?= $user_array['postcode']; ?>" required>
                 </div>
                 <div class="col-md-6 mb-3" style="width:100px;">
                   <input type="button" onclick="execDaumPostcode()" value="우편번호 찾기">
@@ -102,23 +102,23 @@ if($userid == '') {
                 </div>
                 <div class="row">
                   <div class="col-md-12 mb-3">
-                    <input type="text" class="form-control" id="roadAddress" name="roadAddress" placeholder="도로명주소" required>
+                    <input type="text" class="form-control" id="roadAddress" name="roadAddress" value="<?= $user_array['roadAddress']; ?>" required>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-md-12 mb-3">
-                    <input type="text" class="form-control" id="jibunAddress" name="jibunAddress" placeholder="지번주소" required>
+                    <input type="text" class="form-control" id="jibunAddress" name="jibunAddress" value="<?= $user_array['jibunAddress']; ?>" required>
                     <span id="guide" style="color:#999;display:none"></span>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-md-12 mb-3">
-                    <input type="text" class="form-control" id="detailAddress" name="detailAddress" placeholder="상세주소" required>
+                    <input type="text" class="form-control" id="detailAddress" name="detailAddress" value="<?= $user_array['detailAddress']; ?>" required>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-md-12 mb-3">
-                    <input type="text" class="form-control" id="extraAddress" name="extraAddress" placeholder="참고항목" required>
+                    <input type="text" class="form-control" id="extraAddress" name="extraAddress" value="<?= $user_array['extraAddress']; ?>" required>
                   </div>
                 </div>
 
