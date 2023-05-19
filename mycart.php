@@ -66,15 +66,9 @@
                     </td>
                     <td class='itotal'></td>
                     <td>
-<<<<<<< HEAD
                       <form action="manage_cart.php" method="POST">
                         <input type="hidden" name="delete_item" value="<?= $rs['product_id']; ?>">
                         <button class='btn btn-sm btn-outline-danger shadow-none' name="Remove_Items">삭제</button>
-=======
-                      <form action='manage_cart.php' method='POST'>
-                        <button name='Remove_Items' class='btn btn-sm btn-outline-danger'>삭제</button>
-                        <input type='hidden' name='Idx' value='<?= $rs['product_id']; ?>'>
->>>>>>> b9a434d176c7641416983952dbe6338572d0a051
                       </form>
                     </td>
                   </tr>
