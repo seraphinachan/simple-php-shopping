@@ -13,6 +13,9 @@
   <!-- jQuery -->
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
 
+  <!-- Option 1: Include in HTML -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+
   <?php
     include('header.php');
   ?>
@@ -51,7 +54,22 @@
         <img src="./data/seller_upload/<?= $row['image']; ?>" data-idx="<?= $row['idx']; ?>" class="card-img-top" id="view" style="height: 190px; object-fit: cover; cursor: pointer;">
         <div class="card-body">
           <h5 class="text-center"><?= $row['name']; ?></h5>
+          <h5 class="text-center"><?= $row['price']; ?> 원</h5>
           <div class="d-grid gap-2 col-8 mx-auto">
+            <div class="mb-3 text-center">
+              <?php
+                $rating = $row['rating'];
+
+                // 별점에 따라 아이콘 생성
+                for ($i = 1; $i <= 5; $i++) {
+                  if ($i <= $rating) {
+                    echo '<i class="bi bi-star-fill yellow"></i>';
+                  } else {
+                    echo '<i class="bi bi-star"></i>';
+                  }
+                }
+              ?>
+            </div>
             <form action="pay_now.php">
               <input type="hidden" name="idx" value="<?= $row['idx']; ?>">
               <input type="hidden" name="image" value="<?= $row['image']; ?>">
