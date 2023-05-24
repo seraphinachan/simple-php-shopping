@@ -1,6 +1,10 @@
 <?php
   session_start();
 ?>
+
+
+
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
     <a class="navbar-brand me-5 fw-bold fs-3 h-font" href="index.php">Shopping</a>
@@ -16,6 +20,7 @@
           <a class="nav-link me-2" href="items.php">전체 상품</a>
         </li>
       </ul>
+
       <!-- <div class="d-flex">
         <?php
           $count = 0;
@@ -37,6 +42,13 @@
       </div> -->
 
       <div class="d-flex">
+        <form class="d-flex" action="search_items.php" method="GET">
+          <input class="form-control me-2" type="search" name="search" id="search" required>
+          <button class="btn btn-outline-success me-3" type="submit" style="width:80px;">검색</button>
+        </form>
+      </div>
+
+      <div class="d-flex">
 
         <?php
           if ($_SESSION['user_id']) {?>
@@ -56,7 +68,7 @@
                 로그아웃
             </button>
           <?php
-           }else{
+            }else{
           ?>
             <button type="button" class="btn btn-outline-dark shadow-none me-lg-3 me-2" onclick="location.href='login.php'">
                 로그인

@@ -36,7 +36,7 @@ if(isset($_POST["action"]))
   (select count(idx) from product_rating where rating = '4') as four_star_review,
   (select count(idx) from product_rating where rating = '5') as five_star_review
   from
-   product_rating
+  product_rating
   ";
 
   // $query = "SELECT COUNT(*) cnt FROM products";
@@ -58,6 +58,40 @@ if(isset($_POST["action"]))
 
   echo json_encode($output);
   exit;
+}
+
+// 별점 평균 값을 구해서 products 테이블 rating 열에 업데이트하기
+// 사용자가 입력한 데이터 가져오기
+$rating = $_POST['rating'];
+$product_id = $_POST['productid'];
+
+// product_rating 테이블에서 평균 값을 계산하는 쿼리
+$average_rating_query = "
+  SELECT
+    AVG(rating) AS average_rating
+  FROM
+    product_rating
+  WHERE
+    product_id = '$product_id'
+";
+
+$result = $conn->query($average_rating_query);
+
+if ($result && $result->num_rows > 0) {
+  $row = $result->fetch_assoc();
+  $average_rating = $row['average_rating'];
+
+  // products 테이블 업데이트 쿼리
+  $update_query = "
+    UPDATE products
+    SET rating = $average_rating
+    WHERE idx = '$product_id'
+  ";
+
+  $conn->query($update_query);
+
+} else {
+  echo "평균 평점을 계산할 데이터가 없습니다.";
 }
 
 ?>

@@ -78,6 +78,10 @@
     .star-light {
       color: #ccc;
     }
+
+    .yellow {
+      color: #FFD700;
+    }
   </style>
 
 </head>
@@ -173,27 +177,6 @@
       });
     });
   </script>
-  <!-- <script src="js/custom.js"></script> -->
-
-  <!-- ajax 로 데이터 전송 -->
-  <!-- <script>
-    $(document).ready(function(){
-    $("#add_to_cart").submit(function(event) {
-      event.preventDefault();
-      var formData = $(this).serialize();
-      $.ajax({
-        type: "POST",
-        url: "./ajax/ajax.add_to_cart.php",
-        data: formData,
-        success: function(data) {
-            if (confirm("상품이 장바구니에 추가되었습니다. 장바구니로 이동하시겠습니까?")) {
-                window.location.href = "mycart.php";
-            }
-          }
-        });
-      });
-    });
-  </script> -->
 
   <!-- 장바구니 추가 -->
   <script>
@@ -409,6 +392,56 @@
 
     </div>
   </section>
+
+  <div class="container">
+  <!-- 후기 내용 가져오기 -->
+  <?php
+  $comment_query = "SELECT * FROM product_rating ORDER BY idx";
+  $result = mysqli_query($conn, $comment_query);
+
+  if(mysqli_num_rows($result) > 0) {
+    while ($row = mysqli_fetch_assoc($result)) {
+      $rating = $row['rating'];
+  ?>
+      <div class="card mt-4">
+        <div class="card-header"><?= $row['user_id']; ?></div>
+        <div class="card-body">
+          <div class="row">
+            <div class="text-start">
+              <div class="text-start">
+                <?php
+                if ($rating >= 1 && $rating <= 5) {
+                  for ($i = 1; $i <= 5; $i++) {
+                    if ($i <= $rating) {
+                      echo '<i class="bi bi-star-fill yellow"></i>';
+                    } else {
+                      echo '<i class="bi bi-star"></i>';
+                    }
+                  }
+                } else {
+                  echo "평점 데이터를 가져올 수 없습니다.";
+                }
+                ?>
+              </div>
+              <h5 class="card-title"><?= $row['title']; ?></h5>
+              <p class="card-text"><?= $row['content']; ?></p>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer text-muted">
+          <?= $row['reg_time']; ?>
+        </div>
+      </div>
+  <?php
+    }
+  } else {
+    echo "<h5>등록된 후기가 없습니다.</h5>";
+  }
+  ?>
+</div>
+
+
+
 
   <?php
     include('footer.php');
