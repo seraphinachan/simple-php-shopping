@@ -124,7 +124,7 @@ if($userid == '') {
 
 
                 <div class="text-center mt-2 my-1">
-                  <button type="submit" class="btn btn-outline-dark shadow-none mb-3">회원가입</button>
+                  <button type="submit" class="btn btn-outline-dark shadow-none mb-3">개인 정보 수정</button>
                 </div>
             </form>
 

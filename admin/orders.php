@@ -80,7 +80,7 @@
                 </thread>
                 <tbody class="users-data">
                   <?php
-                  $query = "";
+                  $query = "SELECT * FROM orders";
                   $result = mysqli_query($conn, $query);
                   $i = 1;
 

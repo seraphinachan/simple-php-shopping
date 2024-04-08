@@ -24,9 +24,6 @@
           <li class="nav-item">
             <a class="nav-link text-white" href="users.php">회원 관리</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link text-white" href="settings.php">Settings</a>
-          </li>
         </ul>
       </div>
     </div>

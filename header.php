@@ -1,9 +1,9 @@
+<!-- 2024.04.08 김지연 수정 -->
 <?php
-  session_start();
+if (!isset($_SESSION)) {
+    session_start();
+}
 ?>
-
-
-
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
@@ -51,7 +51,7 @@
       <div class="d-flex">
 
         <?php
-          if ($_SESSION['user_id']) {?>
+          if (isset($_SESSION['user_id'])) {?>
             <a href="mycart.php" type="button" class="btn btn-outline-success shadow-none me-lg-3 me-2">
               장바구니 
             </a>
@@ -60,7 +60,8 @@
                 마이 페이지
               </button>
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <li><a class="dropdown-item" href="./order_list.php">주문 내역</a></li>
+                <!-- 2024.04.08 김지연 수정 -->
+                <!-- <li><a class="dropdown-item" href="./order_list.php">주문 내역</a></li> -->
                 <li><a class="dropdown-item" href="./modify_identity.php">개인 정보 수정</a></li>
               </ul>
             </div>

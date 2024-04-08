@@ -88,7 +88,9 @@
             <label class="form-label" id="istotal" name="istotal"></label>
           </div>
           <div class="row">
-            <label class="form-check-label" id="scost" name="scost"></label><?php echo $shipping_cost ?>
+            <label class="form-check-label" id="scost" name="scost"></label>
+              <!-- 2024.04.08 김지연 수정 -->
+              <!-- <?php echo $shipping_cost ?> -->
           </div>
           <hr>
           <div class="row">

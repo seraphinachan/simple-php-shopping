@@ -149,7 +149,7 @@
                                 </td>
                             </tr> 
                             
-                            상품 수정 모달
+                            <!-- 상품 수정 모달 -->
                             <div class="modal fade" id="update-items<?php echo $rs['idx']; ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                               <div class="modal-dialog modal-xl">
                                 <form action="update_items.php" id="update_items<?php echo $rs['idx']; ?>" method="POST" enctype="multipart/form-data">

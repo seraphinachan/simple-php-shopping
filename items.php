@@ -180,7 +180,9 @@
           <nav aria-label="Page navigation">
             <ul class="pagination justify-content-center">
               <?php
-                $rs_str = my_pagination($total, $limit, $page_limit, $page, $param);
+                // 2024.04.08 김지연 수정
+                // $rs_str = my_pagination($total, $limit, $page_limit, $page, $param);
+                $rs_str = my_pagination($total, $limit, $page_limit, $page);
                 echo $rs_str;
               ?>
             </ul>
